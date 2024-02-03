@@ -102,13 +102,12 @@ export function limitCallsDecorator(fn, n) {
  * Provides an alternative interface to `fs.readFile` that dispatches success
  * and error conditions to separate callbacks.
  * 
- * @param {String} fileName    the file path.
- * @param {Function} successFn the function callback that is invoked after a
- *                             file is successfully read. This function takes
- *                             a UTF-8 data buffer as an argument.
- * @param {Function} errorFn   the function callback that is invoked if an error
- *                             occurs while reading the file. This function
- *                             takes an `Error` as an argument.
+ * @param {String}                fileName  the file path.
+ * @param {(data: Buffer) => any} successFn the function callback that is
+ *                                          invoked after a file is read
+ *                                          successfully.
+ * @param {(err: Error) => any}   errorFn   the function callback that is invoked
+ *                                          if an error occurs while reading.
  */
 export function myReadFile(fileName, successFn, errorFn) {
     readFile(fileName, 'utf-8', (err, data) => {
