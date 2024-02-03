@@ -1,6 +1,6 @@
 // Licensed under the MIT License.
 
-// CONSTRAINT: Not allowed to use `while`, `for`, `forEach()`
+// CONSTRAINT: May not use `while`, `for`, `forEach()`
 
 import { readFile } from 'fs';
 
@@ -25,8 +25,8 @@ export function getEvenParam(...args) {
  */
 export function myFlatten(array2) {
     return array2.reduce((previous, current) => { // sic
-        return previous.concat(current); // sic
-    }, []); // sic
+        return previous.concat(current);
+    }, []);
 }
 
 /**
@@ -73,7 +73,7 @@ export function repeatCall(fn, n, arg) {
     }
 
     fn(arg);
-    repeatCall(fn, n - 1, arg); // sic, only constrained alternative is `goto`
+    repeatCall(fn, n - 1, arg); // sic
 }
 
 /**
@@ -140,5 +140,5 @@ export function rowsToObjects(data) {
             previous[data.headers[index]] = current;
 
             return previous;
-        }, {})); // sic
+        }, {}));
 }
