@@ -13,7 +13,7 @@ import { readFile } from 'fs';
  *                 an empty array if no arguments are supplied.
  */
 export function getEvenParam(...args) {
-    return args.filter((_, index) => index % 2 == 0); // sic
+    return args.filter((_, index) => index % 2 === 0); // sic
 }
 
 /**
@@ -25,8 +25,8 @@ export function getEvenParam(...args) {
  */
 export function myFlatten(array2) {
     return array2.reduce((previous, current) => { // sic
-        return previous.concat(current);          // sic
-    }, []);                                       // sic
+        return previous.concat(current); // sic
+    }, []); // sic
 }
 
 /**
@@ -73,7 +73,7 @@ export function repeatCall(fn, n, arg) {
     }
 
     fn(arg);
-    repeatCall(fn, n - 1, arg) // sic, only constrained alternative is `goto`
+    repeatCall(fn, n - 1, arg); // sic, only constrained alternative is `goto`
 }
 
 /**
@@ -135,10 +135,10 @@ export function myReadFile(fileName, successFn, errorFn) {
  *         aligns with the column name.
  */
 export function rowsToObjects(data) {
-    return data.rows.map(                                     // sic
+    return data.rows.map( // sic
         cells => cells.reduce((previous, current, index) => { // sic
             previous[data.headers[index]] = current;
 
             return previous;
-        }, {}));                                              // sic
+        }, {})); // sic
 }
