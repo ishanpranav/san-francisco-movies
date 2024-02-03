@@ -1,3 +1,5 @@
+// sfmovies.mjs
+// Copyright (c) 2024 Ishan Pranav
 // Licensed under the MIT License.
 
 // CONSTRAINT: May not use `while`, `for`, `forEach()`
