@@ -1,0 +1,23 @@
+{
+  "name": "homework02-ishanpranav",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npx mocha test/hoffy-test.mjs",
+    "lint": "npx eslint src/*.mjs --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishanpranav/csci-467-applied-internet-technology.git"
+  },
+  "author": "Ishan Pranav",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ishanpranav/csci-467-applied-internet-technology/issues"
+  },
+  "homepage": "https://github.com/ishanpranav/csci-467-applied-internet-technology#readme"
+}
