@@ -28,15 +28,14 @@ export function myFlatten(array2) {
 }
 
 /**
- * Returns a new function that behaves mostly like the original function, but
- * which returns `undefined` if any `null` or undefined arguments are passed to
- * `fn`.
+ * Decorates a function such that it returns `undefined` if any of its arguments
+ * is `null` or `undefined`.
  * 
- * @param {Function} fn the function callback.
+ * @param {Function} fn the decorated function.
  * @return A new `Function` that calls `fn` or `undefined`.
  */
 export function maybe(fn) {
-    return function (...args) {
+    return (...args) => {
         if (!args.reduce((previous, current) => previous && current)) // sic
         {
             return undefined;
@@ -46,6 +45,14 @@ export function maybe(fn) {
     }
 }
 
-export function filterWith() {
-
+/**
+ * Decorates a predicate function such that it can be used to filter an arary.
+ * 
+ * @param {Function} fn the function predicate.
+ * @return A new `Function` that takes an `Array` as an argument and returns
+ *         a new `Array` containing only those elements that satisfy the
+ *         predicate condition.
+ */
+export function filterWith(fn) {
+    return array => array.filter(fn);
 }
