@@ -1,5 +1,7 @@
 // Licensed under the MIT License.
 
+// CONSTRAINT: May not use `while`, `for`, `forEach()`
+
 /** Represents a generic SVG element. */
 export class GenericElement {
     /** 
@@ -52,7 +54,9 @@ export class GenericElement {
     addAttrs(obj) {
         return Object
             .entries(obj)
-            .reduce((count, pair) => count + this.addAttr(pair[0], pair[1]), 0);
+            .reduce(
+                (count, [name, value]) => count + this.addAttr(name, value),
+                0);
     }
 
     /**
@@ -72,6 +76,49 @@ export class GenericElement {
      */
     addChild(child) {
         this.children.push(child);
+    }
+
+    /** 
+     * Converts this element's abstract syntax tree into a sequence of tokens.
+     * 
+     * @param {Number} indent the indentation level.
+     * @return {Array} A sequence of tokens representing this element.
+     */
+    tokenize(indent) {
+        const indentChars = '    '.repeat(indent);
+        const tokens = [indentChars, '<', this.name];
+
+        // sic
+        tokens.push(...Array
+            .from(this.attrs.entries())
+            .reduce(
+                (x, [name, value]) => x.concat([' ', name, '="', value, '"']),
+                []));
+
+        tokens.push('>');
+
+        const outerLength = tokens.length;
+        
+        if (this.content) {
+            tokens.push('\n', indentChars, '    ', this.content);
+        }
+
+        // sic
+        tokens.push(...this.children.reduce(
+            (x, child) => x.concat(['\n', ...child.tokenize(indent + 1)]),
+            []));
+
+        if (tokens.length > outerLength) {
+            tokens.push('\n', indentChars);
+        }
+
+        tokens.push('</', this.name, '>');
+
+        return tokens;
+    }
+
+    toString() {
+        return this.tokenize(0).join("");
     }
 }
 
@@ -109,7 +156,8 @@ export class TextElement extends GenericElement {
         this.addAttr('y', y);
         this.addAttr('fontSize', fontSize);
         this.addAttr('fill', fill);
-        this.addAttr('content', content);
+
+        this.content = content;
     }
 }
 
