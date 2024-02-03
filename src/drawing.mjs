@@ -45,8 +45,17 @@ export class RootElement extends GenericElement {
 }
 
 /** Represent an SVG rectangle (`rect`) element. */
-class RectangleElement {
+export class RectangleElement extends GenericElement {
+    /** Initializes a new instance of the `RectangleElement` class. */
+    constructor(x, y, width, height, fill) {
+        super('rect');
 
+        this.addAttr('x', x);
+        this.addAttr('y', y);
+        this.addAttr('width', width);
+        this.addAttr('height', height);
+        this.addAttr('fill', fill);
+    }
 }
 
 /** Represents an SVG text (`text`) element. */
