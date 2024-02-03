@@ -3,7 +3,7 @@
 // CONSTRAINT: Not allowed to use `while`, `for`, `forEach()`
 
 /**
- * Filters the given arguments, returning a collection containig every other
+ * Filters the given arguments, returning a collection containing every other
  * argument beginning with the first.
  * 
  * @param  {...any} args any number of string arguments.
@@ -55,4 +55,21 @@ export function maybe(fn) {
  */
 export function filterWith(fn) {
     return array => array.filter(fn);
+}
+
+/**
+ * Invokes a function `n` times, passing a single argument to each invocation.
+ * The return values, if any, are ignored.
+ * 
+ * @param {Function} fn  the function to invoke.
+ * @param {Number}   n   the number of invocations.
+ * @param {*}        arg the function argument.
+ */
+export function repeatCall(fn, n, arg) {
+    if (!n) {
+        return;
+    }
+
+    fn(arg);
+    repeatCall(fn, n - 1, arg) // sic, only constrained alternative is `goto`
 }
