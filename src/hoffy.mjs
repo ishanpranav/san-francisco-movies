@@ -6,7 +6,7 @@
  * Filters the given arguments, returning a collection containing every other
  * argument beginning with the first.
  * 
- * @param  {...any} args any number of string arguments.
+ * @param {...any} args any number of string arguments.
  * @return {Array} An array of every other argument beginning with the first, or
  *                 an empty array if no arguments are supplied.
  */
@@ -72,4 +72,26 @@ export function repeatCall(fn, n, arg) {
 
     fn(arg);
     repeatCall(fn, n - 1, arg) // sic, only constrained alternative is `goto`
+}
+
+/**
+ * Decorates an function such that it can be invoked at most `n` times.
+ *  
+ * @param {Function} fn the decorated function.
+ * @param {Number}   n  the number of invocations.
+ * @return A new `Function` that calls `fn` for the first `n` invocations, then
+ *         returns `undefined`.
+ */
+export function limitCallsDecorator(fn, n) {
+    let i = n;
+
+    return (...args) => {
+        if (!i) {
+            return undefined;
+        }
+
+        i--;
+
+        return fn(...args);
+    };
 }
