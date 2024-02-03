@@ -1,7 +1,5 @@
 // Licensed under the MIT License.
 
-// CONSTRAINT: May not use `while`, `for`, `forEach()`
-
 /** Represents a generic SVG element. */
 export class GenericElement {
     /** 
@@ -11,12 +9,39 @@ export class GenericElement {
      */
     constructor(name) {
         this.name = name;
+        this.attrs = new Map();
+    }
+
+    /**
+     * Adds an attribute with the given name and value to this element;
+     * overwriting an attribute with the same name if it already exists.
+     * 
+     * @param {String} name  the attribute name.
+     * @param {String} value the attribute value.
+     */
+    addAttr(name, value) {
+        this.attrs.set(name, value);
+    }
+
+    /**
+     * Provides an alias for `addAttr`.
+     * 
+     * @param {*} name  the attribute name.
+     * @param {*} value the attribute value.
+     */
+    setAttr(name, value) {
+        this.addAttr(name, value);
     }
 }
 
 /** Represents an SVG root (`svg`) element. */
-class RootElement {
+export class RootElement extends GenericElement {
+    /** Initializes a new instance of the `RootElement` class. */
+    constructor() {
+        super('svg');
 
+        this.addAttr('xmlns', 'http://www.w3.org/2000/svg');
+    }
 }
 
 /** Represent an SVG rectangle (`rect`) element. */
