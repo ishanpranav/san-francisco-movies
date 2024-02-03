@@ -2,6 +2,8 @@
 
 // CONSTRAINT: Not allowed to use `while`, `for`, `forEach()`
 
+import { readFile } from 'fs';
+
 /**
  * Filters the given arguments, returning a collection containing every other
  * argument beginning with the first.
@@ -94,4 +96,28 @@ export function limitCallsDecorator(fn, n) {
 
         return fn(...args);
     };
+}
+
+/**
+ * Provides an alternative interface to `fs.readFile` that dispatches success
+ * and error conditions to separate callbacks.
+ * 
+ * @param {String} fileName    the file path.
+ * @param {Function} successFn the function callback that is invoked after a
+ *                             file is successfully read. This function takes
+ *                             a UTF-8 data buffer as an argument.
+ * @param {Function} errorFn   the function callback that is invoked if an error
+ *                             occurs while reading the file. This function
+ *                             takes an `Error` as an argument.
+ */
+export function myReadFile(fileName, successFn, errorFn) {
+    readFile(fileName, 'utf-8', (err, data) => {
+        if (err) {
+            errorFn(err);
+
+            return;
+        }
+
+        successFn(data);
+    });
 }
