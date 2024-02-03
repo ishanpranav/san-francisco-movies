@@ -49,10 +49,21 @@ export class GenericElement {
      * @return the number of attributes added.
      */
     addAttrs(obj) {
-        // sic
         return Object
             .entries(obj)
-            .reduce((previous, current) => previous + this.addAttr(current), 0);
+            .reduce((count, pair) => count + this.addAttr(pair[0], pair[1]), 0);
+    }
+
+    /**
+     * Given an array of attribute names, removes them if they exist.
+     * 
+     * @param {Array} arr the array of attribute names to remove.
+     * @return the number of attributes removed.
+     */
+    removeAttrs(arr) {
+        return Object
+            .entries(arr)
+            .reduce((count, name) => count + this.attrs.delete(name), 0);
     }
 }
 
