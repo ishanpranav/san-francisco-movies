@@ -13,24 +13,46 @@ export class GenericElement {
     }
 
     /**
-     * Adds an attribute with the given name and value to this element;
-     * overwriting an attribute with the same name if it already exists.
+     * Adds an attribute with the given name and value to this element if it
+     * does not exist.
+     * 
+     * @param {String} name  the attribute name.
+     * @param {String} value the attribute value.
+     * @return `true` if the element was added; otherwise, false.
+     */
+    addAttr(name, value) {
+        if (this.attrs.has(name)) {
+            return false;
+        }
+
+        this.attrs.set(name, value);
+    
+        return true;
+    }
+
+    /**
+     * Sets the value of an attribute with the given name to the given value,
+     * creating it if it does not exist.
      * 
      * @param {String} name  the attribute name.
      * @param {String} value the attribute value.
      */
-    addAttr(name, value) {
+    setAttr(name, value) {
         this.attrs.set(name, value);
     }
 
     /**
-     * Provides an alias for `addAttr`.
+     * Given an object, adds its properties as name-value pairs to this
+     * instance's attributes, including only those that do not already exist.
      * 
-     * @param {*} name  the attribute name.
-     * @param {*} value the attribute value.
+     * @param {*} obj the object whose properties to add as name-value pairs.
+     * @return the number of attributes added.
      */
-    setAttr(name, value) {
-        this.addAttr(name, value);
+    addAttrs(obj) {
+        // sic
+        return Object
+            .entries(obj)
+            .reduce((previous, current) => previous + this.addAttr(current), 0);
     }
 }
 
