@@ -59,8 +59,17 @@ export class RectangleElement extends GenericElement {
 }
 
 /** Represents an SVG text (`text`) element. */
-class TextElement {
+export class TextElement extends GenericElement {
+    /** Initializes a new instance of the `TextElement` class. */
+    constructor(x, y, fontSize, fill, content) {
+        super('text');
 
+        this.addAttr('x', x);
+        this.addAttr('y', y);
+        this.addAttr('fontSize', fontSize);
+        this.addAttr('fill', fill);
+        this.addAttr('content', content);
+    }
 }
 
 // the following is used for testing
