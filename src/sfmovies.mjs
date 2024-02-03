@@ -45,6 +45,10 @@ export function getTitlesByYear(data, year) {
 }
 
 function increment(obj, key) {
+    if (!key) {
+        return;
+    }
+    
     if (!obj[key]) {
         obj[key] = 1;
     

@@ -147,7 +147,15 @@ export class RootElement extends GenericElement {
 
 /** Represent an SVG rectangle (`rect`) element. */
 export class RectangleElement extends GenericElement {
-    /** Initializes a new instance of the `RectangleElement` class. */
+    /**
+     * Initializes a new instance of the `RectangleElement` class.
+     *
+     * @param {Number} x      the horizontal position.
+     * @param {Number} y      the vertical position.
+     * @param {Number} width  the horizontal dimension.
+     * @param {Number} height the vertical dimension.
+     * @param {String} fill   the fill color.
+     */
     constructor(x, y, width, height, fill) {
         super('rect');
 
@@ -161,7 +169,14 @@ export class RectangleElement extends GenericElement {
 
 /** Represents an SVG text (`text`) element. */
 export class TextElement extends GenericElement {
-    /** Initializes a new instance of the `TextElement` class. */
+    /**
+     * Initializes a new instance of the `TextElement` class.
+     * 
+     * @param {Number} x        the horizontal position.
+     * @param {Number} y        the vertical position.
+     * @param {Number} fontSize the font size.
+     * @param {String} content  the text content.
+     */
     constructor(x, y, fontSize, fill, content) {
         super('text');
 
