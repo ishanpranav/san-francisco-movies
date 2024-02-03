@@ -44,7 +44,7 @@ export function maybe(fn) {
         }
 
         return fn(...args);
-    }
+    };
 }
 
 /**
@@ -120,4 +120,25 @@ export function myReadFile(fileName, successFn, errorFn) {
 
         successFn(data);
     });
+}
+
+/**
+ * Converts a two-dimensional array of data to an array of objects with given
+ * property names.
+ * 
+ * @param {*} data An object with two properties: `headers`: an `Array`
+ *                 containing the names of the columns of the data contained in
+ *                 `rows`; `rows`: a two-dimensional `Array` of data, with the
+ *                 first dimension being rows and the second being columns.
+ * @return An `Array` of objects with the original headers (column names) as
+ *         properties, with values taken from the original data in each row that
+ *         aligns with the column name.
+ */
+export function rowsToObjects(data) {
+    return data.rows.map(                                     // sic
+        cells => cells.reduce((previous, current, index) => { // sic
+            previous[data.headers[index]] = current;
+
+            return previous;
+        }, {}));                                              // sic
 }
