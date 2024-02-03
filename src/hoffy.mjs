@@ -20,11 +20,11 @@ export function getEvenParam(...args) {
  * Flattens a two-dimensional array so that all of the elements of the subarray
  * become separate elements in a new one-dimensional array.
  * 
- * @param {Array} array2 a two-dimensional array.
+ * @param {Array} arr2d a two-dimensional array.
  * @return {Array} A new one-dimensional array.
  */
-export function myFlatten(array2) {
-    return array2.reduce((previous, current) => { // sic
+export function myFlatten(arr2d) {
+    return arr2d.reduce((previous, current) => { // sic
         return previous.concat(current);
     }, []);
 }

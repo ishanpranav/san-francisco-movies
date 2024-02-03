@@ -10,6 +10,7 @@ export class GenericElement {
     constructor(name) {
         this.name = name;
         this.attrs = new Map();
+        this.children = [];
     }
 
     /**
@@ -26,7 +27,7 @@ export class GenericElement {
         }
 
         this.attrs.set(name, value);
-    
+
         return true;
     }
 
@@ -61,9 +62,16 @@ export class GenericElement {
      * @return the number of attributes removed.
      */
     removeAttrs(arr) {
-        return Object
-            .entries(arr)
-            .reduce((count, name) => count + this.attrs.delete(name), 0);
+        return arr.reduce((count, name) => count + this.attrs.delete(name), 0);
+    }
+
+    /**
+     * As a child element to this instance.
+     * 
+     * @param {GenericElement} child the element to add.
+     */
+    addChild(child) {
+        this.children.push(child);
     }
 }
 
