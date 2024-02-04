@@ -43,7 +43,7 @@ export function getTitlesByYear(data, year) {
     return Array.from(
         new Set(data
             .filter(datum => datum['Release Year'] == year)
-            .map(datum => datum['Title'] + " (" + year + ")")));
+            .map(datum => datum['Title'].toUpperCase() + " (" + year + ")")));
 }
 
 function increment(obj, key) {
