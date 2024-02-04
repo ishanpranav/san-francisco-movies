@@ -52,7 +52,7 @@ readFile(process.argv[2], 'utf-8', (err, data) => {
         const frequencies = actorCounts(state);
         const sorted = Object
             .entries(frequencies)
-            .sort(([_1, left], [_2, right]) => {
+            .sort(([, left], [, right]) => {
                 return right - left;
             });
 
@@ -61,7 +61,8 @@ readFile(process.argv[2], 'utf-8', (err, data) => {
 
         offset = addBar(root, sorted[0], offset, 'blue');
         offset = addBar(root, sorted[1], offset, 'yellow');
-        offset = addBar(root, sorted[2], offset, 'black');
+        
+        addBar(root, sorted[2], offset, 'black');
 
         root.write('actors.svg', () => {});
     });
