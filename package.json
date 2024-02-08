@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ishanpranav/csci-467-applied-internet-technology.git"
+    "url": "git+https://github.com/ishanpranav/san-francisco-movies.git"
   },
   "author": "Ishan Pranav",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ishanpranav/csci-467-applied-internet-technology/issues"
+    "url": "https://github.com/ishanpranav/san-francisco-movies/issues"
   },
-  "homepage": "https://github.com/ishanpranav/csci-467-applied-internet-technology#readme",
+  "homepage": "https://github.com/ishanpranav/sam-francisco-movies#readme",
   "devDependencies": {
     "chai": "^5.0.3",
     "eslint": "^8.56.0",
