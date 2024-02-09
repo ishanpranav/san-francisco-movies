@@ -52,9 +52,7 @@ readFile(process.argv[2], 'utf-8', (err, data) => {
         const frequencies = actorCounts(state);
         const sorted = Object
             .entries(frequencies)
-            .sort(([, left], [, right]) => {
-                return right - left;
-            });
+            .sort(([, left], [, right]) => right - left);
 
         const root = new RootElement();
         let offset = 0;
