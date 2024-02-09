@@ -85,12 +85,14 @@ export class GenericElement {
     /** 
      * Converts this element's abstract syntax tree into a sequence of tokens.
      * 
+     * @param {Array}  tokens an existing array of tokens.
      * @param {Number} indent the indentation level.
      * @return {Array} A sequence of tokens representing this element.
      */
-    tokenize(indent) {
+    tokenize(tokens, indent) {
         const indentChars = '    '.repeat(indent);
-        const tokens = [indentChars, '<', this.name];
+        
+        tokens.push(indentChars, '<', this.name);
 
         // sic
         tokens.push(...Array
@@ -109,7 +111,7 @@ export class GenericElement {
 
         // sic
         tokens.push(...this.children.reduce(
-            (x, child) => x.concat(['\n', ...child.tokenize(indent + 1)]),
+            (x, child) => x.concat(['\n', ...child.tokenize([], indent + 1)]),
             []));
 
         if (tokens.length > outerLength) {
@@ -122,7 +124,17 @@ export class GenericElement {
     }
 
     toString() {
-        return this.tokenize(0).join("");
+        return this.tokenize([], 0).join("");
+    }
+}
+
+/** Represents an SVG root (`svg`) element. */
+export class RootElement extends GenericElement {
+    /** Initializes a new instance of the `RootElement` class. */
+    constructor() {
+        super('svg');
+
+        this.addAttr('xmlns', 'http://www.w3.org/2000/svg');
     }
 
     /**
@@ -135,15 +147,15 @@ export class GenericElement {
     write(fileName, cb) {
         writeFile(fileName, this.toString(), cb);
     }
-}
 
-/** Represents an SVG root (`svg`) element. */
-export class RootElement extends GenericElement {
-    /** Initializes a new instance of the `RootElement` class. */
-    constructor() {
-        super('svg');
-
-        this.addAttr('xmlns', 'http://www.w3.org/2000/svg');
+    toString() {
+        return this
+            .tokenize([
+`<?xml version="1.0" encoding="utf-8"?>
+<!-- Licensed under the MIT License. -->
+`
+            ], 0)
+            .join("");
     }
 }
 
