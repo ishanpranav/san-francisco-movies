@@ -36,12 +36,11 @@ export function myFlatten(arr2d) {
  * is `null` or `undefined`.
  * 
  * @param {Function} fn the decorated function.
- * @return A new `Function` that calls `fn` or `undefined`.
+ * @return {Function} A new `Function` that calls `fn` or `undefined`.
  */
 export function maybe(fn) {
     return (...args) => {
-        if (!args.reduce((previous, current) => previous && current)) // sic
-        {
+        if (!args.reduce((previous, current) => previous && current)) { // sic
             return undefined;
         }
 
@@ -51,10 +50,10 @@ export function maybe(fn) {
 
 /**
  * Decorates a predicate function such that it can be used to filter an arary.
- * 
+ *
  * @param {Function} fn the function predicate.
- * @return A new `Function` that takes an `Array` as an argument and returns
- *         a new `Array` containing only those elements that satisfy the
+ * @return {Function} A new `Function` that takes an `Array` as an argument and
+ *         returns a new `Array` containing only those elements that satisfy the
  *         predicate condition.
  */
 export function filterWith(fn) {
@@ -79,12 +78,12 @@ export function repeatCall(fn, n, arg) {
 }
 
 /**
- * Decorates an function such that it can be invoked at most `n` times.
- *  
+ * Decorates a function such that it can be invoked at most `n` times.
+ *
  * @param {Function} fn the decorated function.
  * @param {Number}   n  the number of invocations.
- * @return A new `Function` that calls `fn` for the first `n` invocations, then
- *         returns `undefined`.
+ * @return {Function} A new `Function` that calls `fn` for the first `n`
+ *         invocations, then returns `undefined`.
  */
 export function limitCallsDecorator(fn, n) {
     let i = n;
@@ -103,13 +102,14 @@ export function limitCallsDecorator(fn, n) {
 /**
  * Provides an alternative interface to `fs.readFile` that dispatches success
  * and error conditions to separate callbacks.
- * 
+ *
  * @param {String}                fileName  the file path.
  * @param {(data: Buffer) => any} successFn the function callback that is
  *                                          invoked after a file is read
  *                                          successfully.
- * @param {(err: Error) => any}   errorFn   the function callback that is invoked
- *                                          if an error occurs while reading.
+ * @param {(err: Error) => any}   errorFn   the function callback that is
+ *                                          invoked if an error occurs while
+ *                                          reading.
  */
 export function myReadFile(fileName, successFn, errorFn) {
     readFile(fileName, 'utf-8', (err, data) => {
@@ -126,14 +126,14 @@ export function myReadFile(fileName, successFn, errorFn) {
 /**
  * Converts a two-dimensional array of data to an array of objects with given
  * property names.
- * 
+ *
  * @param {*} data An object with two properties: `headers`: an `Array`
  *                 containing the names of the columns of the data contained in
  *                 `rows`; `rows`: a two-dimensional `Array` of data, with the
  *                 first dimension being rows and the second being columns.
- * @return An `Array` of objects with the original headers (column names) as
- *         properties, with values taken from the original data in each row that
- *         aligns with the column name.
+ * @return {Array} An `Array` of objects with the original headers (column
+ *         names) as properties, with values taken from the original data in
+ *         each row that aligns with the column name.
  */
 export function rowsToObjects(data) {
     return data.rows.map( // sic

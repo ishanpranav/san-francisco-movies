@@ -74,7 +74,7 @@ export class GenericElement {
     }
 
     /**
-     * As a child element to this instance.
+     * Adds a child element to this instance.
      * 
      * @param {GenericElement} child the element to add.
      */

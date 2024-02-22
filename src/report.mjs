@@ -53,7 +53,6 @@ readFile(process.argv[2], 'utf-8', (err, data) => {
         const sorted = Object
             .entries(frequencies)
             .sort(([, left], [, right]) => right - left);
-
         const root = new RootElement();
         let offset = 0;
 
