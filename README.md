@@ -7,6 +7,6 @@
 This is a San Francisco Movies dataset parser application implemented in
 JavaScript for the NYU CSCI 467 Applied Internet Technology course.
 
-# License
+## License
 
 This repository is licensed with the [MIT](LICENSE.txt) license.
